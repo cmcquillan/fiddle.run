@@ -1,0 +1,16 @@
+<div class="page-input-wrapper">
+    <mat-form-field>
+        <mat-label>Input</mat-label>
+        <input #input matInput placeholder="Data to Transform into Base64" value="test">
+    </mat-form-field>
+</div>
+<fiddle-transform-box [in]="coerceInput(input.value)" [transform]="transform" (out)="output.value = $event.value">
+</fiddle-transform-box>
+<div class="page-output-wrapper">
+    <h3>Output</h3>
+    <mat-form-field>
+        <mat-label>Output</mat-label>
+        <input #output matInput placeholder="Data to Transform into Base64">
+    </mat-form-field>
+
+</div>

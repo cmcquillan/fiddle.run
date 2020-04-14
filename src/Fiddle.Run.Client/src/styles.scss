@@ -1,0 +1,27 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.app-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #222;
+  color: #ddd;
+  display: block;
+}
+
+/*
+ * Wrappers used on all 'pages'
+ */
+
+.page-input-wrapper,
+.page-output-wrapper {}
