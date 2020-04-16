@@ -72,4 +72,9 @@ export class TransformBoxComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._sub.unsubscribe();
   }
+
+  test(val: any) {
+    console.log(val);
+    return val;
+  }
 }

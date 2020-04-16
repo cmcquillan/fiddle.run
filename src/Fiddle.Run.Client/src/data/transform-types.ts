@@ -1,9 +1,9 @@
 import { Formats } from './format-types';
-import { TransformParameter } from './transforms';
+import { TransformParameter, ITransform } from './transforms';
 import Base64 from './base64';
 
 export class TransformFactory {
-    static createNoop() {
+    static createNoop(): ITransform {
         return {
             in: Formats.Text,
             out: Formats.Text,
@@ -15,7 +15,7 @@ export class TransformFactory {
         };
     }
 
-    static createTextInput() {
+    static createTextInput(): ITransform {
         return {
             in: Formats.Text,
             out: Formats.Text,
@@ -31,7 +31,7 @@ export class TransformFactory {
         };
     }
 
-    static createTextOutput() {
+    static createTextOutput(): ITransform {
         return {
             in: Formats.Text,
             out: Formats.Text,
@@ -47,24 +47,40 @@ export class TransformFactory {
         };
     }
 
-    static createBase64Encode() {
+    static createBase64Encode(): ITransform {
         return {
             in: Formats.Text,
             out: Formats.Text,
             func: (ctx) => {
-                ctx.setData(Base64.encode(ctx.data.value), Formats.Text);
+
+                const mode = ctx.transform.params.mode.value;
+                console.log('data: ', ctx.transform.params.mode);
+                console.log('mode: ', mode);
+                if (mode === 'encode') {
+                    ctx.setData(Base64.encode(ctx.data.value), Formats.Text);
+                } else {
+                    ctx.setData(Base64.decode(ctx.data.value), Formats.Text);
+                }
+
                 return true;
             },
-            name: 'Base 64 Encode'
+            name: 'Base 64',
+            params: {
+                mode: new TransformParameter('select', 'encode', 'Encode/Decode', {
+                    values: [
+                        { value: 'encode', display: 'Encode' },
+                        { value: 'decode', display: 'Decode' }
+                    ]
+                })
+            }
         };
     }
 
-    static createBase64Decode() {
+    static createBase64Decode(): ITransform {
         return {
             in: Formats.Text,
             out: Formats.Text,
             func: (ctx) => {
-                ctx.setData(Base64.decode(ctx.data.value), Formats.Text);
                 return true;
             },
             name: 'Base 64 Decode'

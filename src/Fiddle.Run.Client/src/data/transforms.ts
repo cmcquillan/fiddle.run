@@ -49,7 +49,7 @@ export class ErrorContext extends TransformContext {
     }
 }
 
-export type ParameterType = 'text' | 'number' | 'out';
+export type ParameterType = 'text' | 'number' | 'out' | 'select';
 
 export class TransformParameter {
     private readonly _value: BehaviorSubject<any>;
