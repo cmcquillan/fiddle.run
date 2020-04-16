@@ -20,7 +20,7 @@ export class Base64PageComponent implements OnInit {
 
   @ViewChild('output') out: any;
 
-  input$ = this.input
+  input$ = this.input;
 
   constructor(
     transforms: TransformStoreService) {

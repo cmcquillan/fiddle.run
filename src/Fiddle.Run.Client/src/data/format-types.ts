@@ -8,13 +8,13 @@ const IDS = {
 };
 
 export const Formats = {
-    Null: new DataFormat(IDS.Null, "Null"),
-    Any: new DataFormat(IDS.Any, "Any"),
-    Error: new DataFormat(IDS.Error, "Error"),
-    Text: new DataFormat(IDS.Text, "Text"),
+    Null: new DataFormat(IDS.Null, 'Null'),
+    Any: new DataFormat(IDS.Any, 'Any'),
+    Error: new DataFormat(IDS.Error, 'Error'),
+    Text: new DataFormat(IDS.Text, 'Text'),
 };
 
 export const NullFormatted: IFormattedData = {
     value: null,
     format: Formats.Null,
-}
+};

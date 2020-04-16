@@ -79,5 +79,5 @@ export interface ITransform {
     name: string;
     params?: {
         [key: string]: TransformParameter;
-    }
+    };
 }

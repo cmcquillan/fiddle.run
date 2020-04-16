@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: 'templates/base64',
     component: Base64PageComponent,
-  }, 
+  },
   {
     path: '',
     component: PalettePageComponent,

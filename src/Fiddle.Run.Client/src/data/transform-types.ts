@@ -68,6 +68,6 @@ export class TransformFactory {
                 return true;
             },
             name: 'Base 64 Decode'
-        }
-    };
+        };
+    }
 }

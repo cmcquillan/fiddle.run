@@ -41,7 +41,7 @@ export class TransformBoxComponent implements OnInit, OnDestroy {
             || value === NullFormatted
             || value.format.id == Formats.Any.id) {
 
-            var ctx = new TransformContext(value, transform);
+            const ctx = new TransformContext(value, transform);
             if (transform.func(ctx)) {
               return ctx;
             }
