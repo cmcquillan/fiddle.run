@@ -3,7 +3,7 @@ import { ReplaySubject, Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Formats, NullFormatted } from './format-types';
 
 export interface ITransformMap {
-    [name: string]: ITransform;
+    [name: string]: () => ITransform;
 }
 
 export interface ITransformContext {

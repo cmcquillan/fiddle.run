@@ -3,10 +3,10 @@ import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ChangeDetect
 import { BehaviorSubject, Subscription, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ITransform, TransformContext, ITransformContext, ErrorContext } from 'src/data/transforms';
+import { ITransform, TransformContext, ErrorContext } from 'src/data/transforms';
 import { IFormattedData } from 'src/data/format';
-import { Transforms } from 'src/data/transform-types';
 import { NullFormatted, Formats } from 'src/data/format-types';
+import { TransformFactory } from 'src/data/transform-types';
 
 @Component({
   selector: 'fiddle-transform-box',
@@ -15,7 +15,7 @@ import { NullFormatted, Formats } from 'src/data/format-types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransformBoxComponent implements OnInit, OnDestroy {
-  private readonly _transform = new BehaviorSubject<ITransform>(Transforms.Noop);
+  private readonly _transform = new BehaviorSubject<ITransform>(TransformFactory.createNoop());
   private readonly _in = new BehaviorSubject<IFormattedData>(NullFormatted);
   private readonly _parameterChanged = new BehaviorSubject<boolean>(true);
   private _sub: Subscription = null;
@@ -37,8 +37,8 @@ export class TransformBoxComponent implements OnInit, OnDestroy {
     this._sub = inputs.pipe(
       map(([value, transform]) => {
         if (transform && value) {
-          if (transform.in.id === value.format.id 
-            || value === NullFormatted 
+          if (transform.in.id === value.format.id
+            || value === NullFormatted
             || value.format.id == Formats.Any.id) {
 
             var ctx = new TransformContext(value, transform);
