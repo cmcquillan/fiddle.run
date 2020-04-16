@@ -1,6 +1,6 @@
 import { IFormattedData, IFormat, Data } from './format';
-import { ReplaySubject, Observable } from 'rxjs';
-import { Formats } from './format-types';
+import { ReplaySubject, Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Formats, NullFormatted } from './format-types';
 
 export interface ITransformMap {
     [name: string]: ITransform;
@@ -8,7 +8,8 @@ export interface ITransformMap {
 
 export interface ITransformContext {
     data: IFormattedData;
-    transform: IFormattedData;
+    transform: ITransform;
+    transformedValue: IFormattedData;
     setData(value: any, format: IFormat): void;
 }
 
@@ -16,17 +17,24 @@ export class TransformContext implements ITransformContext {
     private _transform: IFormattedData = null;
     private _transformSubject = new ReplaySubject<IFormattedData>(1);
 
+
     constructor(
-        public data: IFormattedData
-    ) { }
+        public data: IFormattedData,
+        public transform: ITransform,
+    ) {
+    }
 
     setData(value: any, format: IFormat): void {
         this._transform = new Data(value, format);
         this._transformSubject.next(this._transform);
     }
 
-    get transform(): IFormattedData {
+    get transformedValue(): IFormattedData {
         return this._transform;
+    }
+
+    get inputIsNull(): boolean {
+        return this.data === NullFormatted;
     }
 
     asObservable(): Observable<IFormattedData> {
@@ -36,13 +44,40 @@ export class TransformContext implements ITransformContext {
 
 export class ErrorContext extends TransformContext {
     constructor(data: IFormattedData, error: any) {
-        super(data);
+        super(data, null);
         this.setData(error, Formats.Error);
     }
+}
+
+export type ParameterType = 'text' | 'number' | 'out';
+
+export class TransformParameter {
+    private readonly _value: BehaviorSubject<any>;
+    private readonly _value$: Observable<any>;
+
+    constructor(
+        public type: ParameterType,
+        defaultValue?: any,
+        public prompt?: string,
+        public opts?: any) {
+        this._value = new BehaviorSubject<any>(defaultValue);
+        this._value$ = this._value.asObservable();
+    }
+
+    next(value: any) { this._value.next(value); }
+
+    get value(): any { return this._value.value; }
+    set value(data: any) { this.next(data); }
+
+    get value$(): Observable<any> { return this._value$; }
 }
 
 export interface ITransform {
     in: IFormat;
     func: (ctx: ITransformContext) => boolean;
     out: IFormat;
+    name: string;
+    params?: {
+        [key: string]: TransformParameter;
+    }
 }

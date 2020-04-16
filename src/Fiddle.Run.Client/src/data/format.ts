@@ -1,3 +1,5 @@
+import { Formats } from './format-types';
+
 export interface IFormat {
     id: number;
     name: string;

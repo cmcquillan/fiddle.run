@@ -12,7 +12,9 @@ import { Formats } from 'src/data/format-types';
   styleUrls: ['./base64-page.component.scss']
 })
 export class Base64PageComponent implements OnInit {
+  private readonly _inbox: ITransform;
   private readonly _transform: ITransform;
+  private readonly _outbox: ITransform;
 
   @ViewChild('input') input: MatInput;
 
@@ -23,16 +25,18 @@ export class Base64PageComponent implements OnInit {
   constructor(
     transforms: TransformStoreService) {
     this._transform = transforms.get('atob');
+    this._inbox = transforms.get('textInput');
+    this._outbox = transforms.get('textOutput');
   }
 
   get transform(): ITransform { return this._transform; }
+  get inboxTransform(): ITransform { return this._inbox; }
+  get outboxTransform(): ITransform { return this._outbox; }
 
   ngOnInit(): void {
-    console.log(this.out);
   }
 
   coerceInput(data: string) {
     return new Data(data, Formats.Text);
   }
-
 }

@@ -1,4 +1,3 @@
-import { ITransformMap } from './transforms';
 import { Formats } from './format-types';
 
 export const Transforms = {
@@ -8,6 +7,7 @@ export const Transforms = {
         func: (ctx) => {
             ctx.setData(ctx.data.value, ctx.data.format);
             return true;
-        }
+        },
+        name: 'Noop',
     },
 };

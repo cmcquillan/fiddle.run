@@ -1,13 +1,20 @@
-import { DataFormat } from './format';
+import { DataFormat, IFormattedData } from './format';
 
 const IDS = {
-    Error: 1,
-    Base64String: 100,
+    Null: 0,
+    Any: 1,
     Text: 101,
+    Error: 500,
 };
 
 export const Formats = {
+    Null: new DataFormat(IDS.Null, "Null"),
+    Any: new DataFormat(IDS.Any, "Any"),
     Error: new DataFormat(IDS.Error, "Error"),
-    Base64String: new DataFormat(IDS.Base64String, "Base 64 String"),
     Text: new DataFormat(IDS.Text, "Text"),
 };
+
+export const NullFormatted: IFormattedData = {
+    value: null,
+    format: Formats.Null,
+}

@@ -1,9 +1,22 @@
-<div class="fiddle-transform-box">
-    <h4>
-        {{ (transform$ | async)?.in?.name }}
-    </h4>
-    <br />
-    <h4>
-        {{ (transform$ | async)?.out?.name }}
-    </h4>
-</div>
+<ng-container *ngIf="transform$ | async; let tr">
+    <mat-card class="mat-elevation-z3 fiddle-transform-box">
+        <mat-card-header>
+            <mat-card-title>
+                {{ tr?.name }}
+            </mat-card-title>
+            <mat-card-subtitle>
+                {{ tr?.in?.name }} -> {{ tr?.out?.name }}
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <ng-container *ngFor="let param of tr.params | keyvalue;">
+                <mat-form-field [ngSwitch]="param.value.type">
+                    <mat-label>{{ param.value.prompt }}</mat-label>
+                    <input *ngSwitchCase="'text'" matInput [(ngModel)]="param.value.value"
+                        (keyup)="parameterChanged()" />
+                    <textarea *ngSwitchCase="'out'" matInput>{{ param.value.value$ | async }}</textarea>
+                </mat-form-field>
+            </ng-container>
+        </mat-card-content>
+    </mat-card>
+</ng-container>
