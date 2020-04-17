@@ -1,5 +1,5 @@
 import { IFormattedData, IFormat, Data } from './format';
-import { ReplaySubject, Observable, Subject, BehaviorSubject } from 'rxjs';
+import { ReplaySubject, Observable, BehaviorSubject } from 'rxjs';
 import { Formats, NullFormatted } from './format-types';
 
 export interface ITransformMap {
@@ -49,7 +49,7 @@ export class ErrorContext extends TransformContext {
     }
 }
 
-export type ParameterType = 'text' | 'number' | 'out' | 'select';
+export type ParameterType = 'text' | 'function' | 'number' | 'out' | 'select';
 
 export class TransformParameter {
     private readonly _value: BehaviorSubject<any>;
