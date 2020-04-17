@@ -1,7 +1,9 @@
 <div class="app-container">
-  <div class="app-toolbar" role="banner">
-    <a [ngClass]="'app-nav-link'" routerLink="/">Palette</a>
-    <a [ngClass]="'app-nav-link'" routerLink="/templates/base64">Base 64</a>
+  <div class="app-toolbar bg-dark mat-elevation-z6" role="banner">
+    <!-- <a mat-raised-button routerLinkActive #rla="routerLinkActive" [color]="rla.isActive ? 'Primary' : null"
+      class="app-nav-link" routerLink="/">Palette</a> -->
+    <a mat-raised-button routerLinkActive #rla="routerLinkActive" [color]="rla.isActive ? 'Primary' : null"
+      class="app-nav-link" routerLink="/templates/base64">Base 64</a>
   </div>
 
   <div class="app-content" role="main">
