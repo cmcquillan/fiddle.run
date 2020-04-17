@@ -1,0 +1,8 @@
+<fiddle-transform-box #inbox class="palette-item" [transform]="input" (out)="parseBox.in = $event">
+</fiddle-transform-box>
+<fiddle-transform-box #parseBox class="palette-item" [transform]="parseJSON" (out)="formatBox.in = $event">
+</fiddle-transform-box>
+<fiddle-transform-box #formatBox class="palette-item" [transform]="formatJSON" (out)="outbox.in = $event">
+</fiddle-transform-box>
+<fiddle-transform-box #outbox class="palette-item" [transform]="output">
+</fiddle-transform-box>

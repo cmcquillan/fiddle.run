@@ -3,6 +3,35 @@ import { TransformParameter, ITransform } from './transforms';
 import Base64 from './base64';
 
 export class TransformFactory {
+    static createParseJSON(): ITransform {
+        return {
+            in: Formats.Text,
+            out: Formats.Object,
+            func: (ctx) => {
+                try {
+                    let parsed = JSON.parse(ctx.data.value);
+                    ctx.setData(parsed, Formats.Object);
+                } catch {
+                    ctx.setData({}, Formats.Object);
+                }
+                return true;
+            },
+            name: 'Parse JSON'
+        };
+    }
+
+    static createFormatJSON(): ITransform {
+        return {
+            in: Formats.Object,
+            out: Formats.Text,
+            func: (ctx) => {
+                ctx.setData(JSON.stringify(ctx.data.value, null, 4), Formats.Text);
+                return true;
+            },
+            name: 'Format as JSON'
+        };
+    }
+
     static createNoop(): ITransform {
         return {
             in: Formats.Text,

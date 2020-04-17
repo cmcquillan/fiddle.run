@@ -13,8 +13,7 @@ import { PalettePageComponent } from './pages/palette-page/palette-page.componen
 import { Base64PageComponent } from './pages/base64-page/base64-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-
-
+import { FormatJsonPageComponent } from './pages/format-json-page/format-json-page.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     TransformBoxComponent,
     PalettePageComponent,
     Base64PageComponent,
+    FormatJsonPageComponent,
   ],
   imports: [
     BrowserModule,

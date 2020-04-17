@@ -10,7 +10,9 @@ export class TransformStoreService {
     textInput: TransformFactory.createTextInput,
     textOutput: TransformFactory.createTextOutput,
     atob: TransformFactory.createBase64Encode,
-    btoa: TransformFactory.createBase64Decode
+    btoa: TransformFactory.createBase64Decode,
+    parseJSON: TransformFactory.createParseJSON,
+    formatJSON: TransformFactory.createFormatJSON,
   };
 
   constructor() { }

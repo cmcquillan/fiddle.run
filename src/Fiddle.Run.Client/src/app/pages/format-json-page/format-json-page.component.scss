@@ -1,0 +1,12 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.palette-item {
+    flex: 2 1 auto;
+    margin: 2em;
+}
