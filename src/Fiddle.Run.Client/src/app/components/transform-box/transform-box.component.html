@@ -10,18 +10,22 @@
         </mat-card-header>
         <mat-card-content>
             <ng-container *ngFor="let param of tr.params | keyvalue;">
-                <mat-form-field class="fiddle-box-param-field" [ngSwitch]="param.value.type">
-                    <mat-label>{{ param.value.prompt }}</mat-label>
-                    <input *ngSwitchCase="'text'" matInput [(ngModel)]="param.value.value"
-                        (keyup)="parameterChanged()" />
-                    <textarea *ngSwitchCase="'out'" matInput>{{ param.value.value$ | async }}</textarea>
-                    <mat-select *ngSwitchCase="'select'" [(ngModel)]="param.value.value"
-                        (selectionChange)="parameterChanged()">
-                        <mat-option *ngFor="let data of param.value.opts.values" [value]="data.value">
-                            {{ data.display }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <ng-container [ngSwitch]="param.value.type">
+                    <mat-form-field *ngSwitchCase="'text'" class="fiddle-box-param-field">
+                        <mat-label>{{ param.value.prompt }}</mat-label>
+                        <input matInput [(ngModel)]="param.value.value" (keyup)="parameterChanged()" />
+                    </mat-form-field>
+                    <fiddle-code-display *ngSwitchCase="'out'" [code]="param.value.value$ | async" [language]="'js'">
+                    </fiddle-code-display>
+                    <mat-form-field *ngSwitchCase="'select'" class="fiddle-box-param-field">
+                        <mat-label>{{ param.value.prompt }}</mat-label>
+                        <mat-select [(ngModel)]="param.value.value" (selectionChange)="parameterChanged()">
+                            <mat-option *ngFor="let data of param.value.opts.values" [value]="data.value">
+                                {{ data.display }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </ng-container>
             </ng-container>
         </mat-card-content>
         <mat-card-actions>
