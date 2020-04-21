@@ -1,0 +1,11 @@
+<ng-container *ngIf="transforms && transforms.length > 0">
+    <ng-container *ngFor="let tr of transforms; index as i; first as isFirst; last as isLast">
+        <fiddle-transform-box *ngIf="isFirst" applyTransform [apply]="tr" (out)="boxes[i].next($event)">
+        </fiddle-transform-box>
+        <fiddle-transform-box *ngIf="!isFirst && !isLast" applyTransform [apply]="tr" [in]="boxes[i-1] | async"
+            (out)="boxes[i].next($event)">
+        </fiddle-transform-box>
+        <fiddle-transform-box *ngIf="isLast" applyTransform [apply]="tr" [in]="boxes[i-1] | async">
+        </fiddle-transform-box>
+    </ng-container>
+</ng-container>

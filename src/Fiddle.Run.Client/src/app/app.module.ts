@@ -15,6 +15,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { FormatJsonPageComponent } from './pages/format-json-page/format-json-page.component';
 import { CodeDisplayComponent } from './components/code-display/code-display.component';
+import { TestPageComponent } from './pages/test-page/test-page.component';
+import { TransformApplierDirective } from './directives/transform-applier.directive';
+import { ChainTransformComponent } from './components/chain-transform/chain-transform.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,9 @@ import { CodeDisplayComponent } from './components/code-display/code-display.com
     Base64PageComponent,
     FormatJsonPageComponent,
     CodeDisplayComponent,
+    TestPageComponent,
+    TransformApplierDirective,
+    ChainTransformComponent,
   ],
   imports: [
     BrowserModule,

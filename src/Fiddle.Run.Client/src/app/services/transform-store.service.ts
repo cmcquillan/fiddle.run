@@ -13,6 +13,7 @@ export class TransformStoreService {
     btoa: TransformFactory.createBase64Decode,
     parseJSON: TransformFactory.createParseJSON,
     formatJSON: TransformFactory.createFormatJSON,
+    appendString: TransformFactory.appendString,
   };
 
   constructor() { }

@@ -115,4 +115,19 @@ export class TransformFactory {
             name: 'Base 64 Decode'
         };
     }
+
+    static appendString(): ITransform {
+        return {
+            in: Formats.Text,
+            out: Formats.Text,
+            func: (ctx) => {
+                ctx.setData(`${ctx.data.value}${ctx.transform.params.text.value}`, Formats.Text);
+                return true;
+            },
+            name: 'Append String',
+            params: {
+                text: new TransformParameter('text', '', 'Append String'),
+            }
+        };
+    }
 }
