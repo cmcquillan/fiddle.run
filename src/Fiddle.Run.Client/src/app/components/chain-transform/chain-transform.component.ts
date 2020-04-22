@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TransformStoreService } from 'src/app/services/transform-store.service';
 import { Subject } from 'rxjs';
 
 @Component({

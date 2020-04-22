@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TransformStoreService } from 'src/app/services/transform-store.service';
-import { ITransform } from 'src/data/transforms';
+import { Transform } from 'src/data/transforms';
 
 @Component({
   selector: 'fiddle-format-json-page',
@@ -9,10 +9,10 @@ import { ITransform } from 'src/data/transforms';
 })
 export class FormatJsonPageComponent implements OnInit {
 
-  input: ITransform;
-  output: ITransform;
-  parseJSON: ITransform;
-  formatJSON: ITransform;
+  input: Transform;
+  output: Transform;
+  parseJSON: Transform;
+  formatJSON: Transform;
 
   constructor(transform: TransformStoreService) {
     this.input = transform.get('textInput');

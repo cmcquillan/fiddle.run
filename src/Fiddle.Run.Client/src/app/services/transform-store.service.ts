@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import { ITransformMap } from 'src/data/transforms';
+import { TransformMap } from 'src/data/transforms';
 import { TransformFactory } from 'src/data/transform-types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransformStoreService {
-  private readonly _transforms: ITransformMap = {
+  private readonly _transforms: TransformMap = {
     textInput: TransformFactory.createTextInput,
     textOutput: TransformFactory.createTextOutput,
     atob: TransformFactory.createBase64Encode,
-    btoa: TransformFactory.createBase64Decode,
     parseJSON: TransformFactory.createParseJSON,
     formatJSON: TransformFactory.createFormatJSON,
     appendString: TransformFactory.appendString,

@@ -1,133 +1,90 @@
 import { Formats } from './format-types';
-import { TransformParameter, ITransform } from './transforms';
+import { TransformParameter, Transform, TransformFunction } from './transforms';
 import Base64 from './base64';
 
+const parseJSON: TransformFunction = (ctx) => {
+    try {
+        let parsed = JSON.parse(ctx.data.value);
+        ctx.setData(parsed, Formats.Object);
+    } catch {
+        ctx.setData({}, Formats.Object);
+    }
+    return true;
+}
+
+const formatJSON: TransformFunction = (ctx) => {
+    ctx.setData(JSON.stringify(ctx.data.value, null, 4), Formats.Text);
+    return true;
+}
+
+const textInput: TransformFunction = (ctx) => {
+    const val = ctx.params.input || '';
+    ctx.setData(val, Formats.Text);
+    return true;
+}
+
+const textOutput: TransformFunction = (ctx) => {
+    ctx.setData(ctx.data.value, ctx.data.format, 'output');
+    return true;
+}
+
+const base64Encode: TransformFunction = (ctx) => {
+    const mode = ctx.params.mode;
+    if (mode === 'encode') {
+        ctx.setData(Base64.encode(ctx.data.value || ''), Formats.Text);
+    } else {
+        ctx.setData(Base64.decode(ctx.data.value || ''), Formats.Text);
+    }
+
+    return true;
+}
+
+const appendString: TransformFunction = (ctx) => {
+    ctx.setData(`${ctx.data.value}${ctx.params.text}`, Formats.Text);
+    return true;
+}
+
+const noop: TransformFunction = (ctx) => {
+    return true;
+}
+
 export class TransformFactory {
-    static createParseJSON(): ITransform {
-        return {
-            in: Formats.Text,
-            out: Formats.Object,
-            func: (ctx) => {
-                try {
-                    let parsed = JSON.parse(ctx.data.value);
-                    ctx.setData(parsed, Formats.Object);
-                } catch {
-                    ctx.setData({}, Formats.Object);
-                }
-                return true;
-            },
-            name: 'Parse JSON'
-        };
+    static createParseJSON(): Transform {
+        return new Transform(Formats.Text, Formats.Object, 'Parse JSON', parseJSON);
     }
 
-    static createFormatJSON(): ITransform {
-        return {
-            in: Formats.Object,
-            out: Formats.Text,
-            func: (ctx) => {
-                ctx.setData(JSON.stringify(ctx.data.value, null, 4), Formats.Text);
-                return true;
-            },
-            name: 'Format as JSON'
-        };
+    static createFormatJSON(): Transform {
+        return new Transform(Formats.Object, Formats.Text, 'Format as JSON', formatJSON);
     }
 
-    static createNoop(): ITransform {
-        return {
-            in: Formats.Text,
-            out: Formats.Text,
-            func: (ctx) => {
-                ctx.setData(ctx.data.value, ctx.data.format);
-                return true;
-            },
-            name: 'Noop',
-        };
+    static createNoop(): Transform {
+        return new Transform(Formats.Text, Formats.Text, 'Noop', noop);
     }
 
-    static createTextInput(): ITransform {
-        return {
-            in: Formats.Text,
-            out: Formats.Text,
-            func: (ctx) => {
-                const val = ctx.transform.params.input.value || '';
-                ctx.setData(val, Formats.Text);
-                return true;
-            },
-            name: 'Input Text',
-            params: {
-                input: new TransformParameter('text', '', 'Text to Transform')
-            }
-        };
+    static createTextInput(): Transform {
+        return new Transform(Formats.Text, Formats.Text, 'Input Text', textInput, [
+            new TransformParameter('input', 'text', '', 'Text to Transform')
+        ]);
     }
 
-    static createTextOutput(): ITransform {
-        return {
-            in: Formats.Text,
-            out: Formats.Text,
-            func: (ctx) => {
-                ctx.transform.params.output.next(ctx.data.value);
-                ctx.setData(ctx.data.value, ctx.data.format);
-                return true;
-            },
-            name: 'Output Text',
-            params: {
-                output: new TransformParameter('out', null, 'Transformed Text')
-            }
-        };
+    static createTextOutput(): Transform {
+        return new Transform(Formats.Text, Formats.Text, 'Output Text', textOutput, [], ['default', 'output']);
     }
 
-    static createBase64Encode(): ITransform {
-        return {
-            in: Formats.Text,
-            out: Formats.Text,
-            func: (ctx) => {
-
-                const mode = ctx.transform.params.mode.value;
-                console.log('data: ', ctx.transform.params.mode);
-                console.log('mode: ', mode);
-                if (mode === 'encode') {
-                    ctx.setData(Base64.encode(ctx.data.value), Formats.Text);
-                } else {
-                    ctx.setData(Base64.decode(ctx.data.value), Formats.Text);
-                }
-
-                return true;
-            },
-            name: 'Base 64',
-            params: {
-                mode: new TransformParameter('select', 'encode', 'Encode/Decode', {
-                    values: [
-                        { value: 'encode', display: 'Encode' },
-                        { value: 'decode', display: 'Decode' }
-                    ]
-                })
-            }
-        };
+    static createBase64Encode(): Transform {
+        return new Transform(Formats.Text, Formats.Text, 'Base 64', base64Encode, [
+            new TransformParameter('mode', 'select', 'encode', 'Encode/Decode', {
+                values: [
+                    { value: 'encode', display: 'Encode' },
+                    { value: 'decode', display: 'Decode' }
+                ]
+            })
+        ]);
     }
 
-    static createBase64Decode(): ITransform {
-        return {
-            in: Formats.Text,
-            out: Formats.Text,
-            func: (ctx) => {
-                return true;
-            },
-            name: 'Base 64 Decode'
-        };
-    }
-
-    static appendString(): ITransform {
-        return {
-            in: Formats.Text,
-            out: Formats.Text,
-            func: (ctx) => {
-                ctx.setData(`${ctx.data.value}${ctx.transform.params.text.value}`, Formats.Text);
-                return true;
-            },
-            name: 'Append String',
-            params: {
-                text: new TransformParameter('text', '', 'Append String'),
-            }
-        };
+    static appendString(): Transform {
+        return new Transform(Formats.Text, Formats.Text, 'Append String', appendString, [
+            new TransformParameter('text', 'text', '', 'Append String'),
+        ]);
     }
 }
