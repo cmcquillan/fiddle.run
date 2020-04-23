@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject, Observable } from 'rxjs';
+import { Pipeline } from 'src/data/pipeline';
+import { TransformStoreService } from 'src/app/services/transform-store.service';
 
 @Component({
   selector: 'fiddle-chain-transform',
@@ -7,21 +9,24 @@ import { Subject } from 'rxjs';
   styleUrls: ['./chain-transform.component.scss']
 })
 export class ChainTransformComponent implements OnInit {
+  private readonly _pipeline = new BehaviorSubject<Pipeline>(null);
   private _transforms: string[];
-  boxes: Subject<any>[] = [];
+
+  get pipeline$(): Observable<Pipeline> { return this._pipeline.asObservable(); }
 
   get transforms(): string[] { return this._transforms; }
   @Input() set transforms(val: string[]) {
-    this.boxes = Array(val.length);
+    this._transforms = val;
 
-    for (let i = 0; i < val.length; i++) {
-      this.boxes[i] = new Subject<any>();
+    const trArray = [];
+    for (let i = 0; i < this._transforms.length; i++) {
+      trArray[i] = this._store.get(this._transforms[i]);
     }
 
-    this._transforms = val;
+    this._pipeline.next(new Pipeline(trArray));
   }
 
-  constructor() {
+  constructor(private readonly _store: TransformStoreService) {
   }
 
   ngOnInit(): void {

@@ -39,6 +39,17 @@ const base64Encode: TransformFunction = (ctx) => {
     return true;
 }
 
+const urlEncode: TransformFunction = (ctx) => {
+    const mode = ctx.params.mode;
+    if (mode === 'encode') {
+        ctx.setData(encodeURIComponent(ctx.data.value || ''), Formats.Text);
+    } else {
+        ctx.setData(decodeURIComponent(ctx.data.value || ''), Formats.Text);
+    }
+
+    return true;
+}
+
 const appendString: TransformFunction = (ctx) => {
     ctx.setData(`${ctx.data.value}${ctx.params.text}`, Formats.Text);
     return true;
@@ -80,6 +91,17 @@ export class TransformFactory {
                 ]
             })
         ]);
+    }
+
+    static createUriEncode(): Transform {
+        return new Transform(Formats.Text, Formats.Text, 'URI Encoder', urlEncode, [
+            new TransformParameter('mode', 'select', 'encode', 'Encode/Decode', {
+                values: [
+                    { value: 'encode', display: 'Encode' },
+                    { value: 'decode', display: 'Decode' }
+                ]
+            })
+        ])
     }
 
     static appendString(): Transform {

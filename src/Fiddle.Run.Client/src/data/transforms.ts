@@ -74,7 +74,7 @@ export class TransformParameter {
     get value$(): Observable<any> { return this._value$; }
 }
 
-export type TransformFunction = (ctx: TransformContext) => boolean;
+export type TransformFunction = (ctx: TransformContext) => boolean | Promise<boolean>;
 
 export interface TransformError {
     message: string;
@@ -179,13 +179,13 @@ export class Transform {
             map(([inputData, paramData]) => {
 
                 const ctx = new TransformContext(inputData, this, paramData);
-                if (!this._func(ctx)) {
+                if (!(this._func(ctx))) {
                     this._errorStream.next({ message: 'Failure when transforming data.' });
                 }
 
                 return ctx;
             }),
-            tap((ctx) => {
+            tap(async (ctx) => {
                 ctx.getOutputNames().forEach((val) => this.pushOutput(val, ctx.getOutputValue(val)));
             }),
             map((ctx) => ctx.transformedValue),

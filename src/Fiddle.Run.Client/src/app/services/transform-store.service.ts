@@ -13,6 +13,7 @@ export class TransformStoreService {
     parseJSON: TransformFactory.createParseJSON,
     formatJSON: TransformFactory.createFormatJSON,
     appendString: TransformFactory.appendString,
+    uriEncode: TransformFactory.createUriEncode,
   };
 
   constructor() { }
