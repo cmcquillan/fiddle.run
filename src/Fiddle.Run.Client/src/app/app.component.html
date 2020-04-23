@@ -2,12 +2,16 @@
   <div class="app-toolbar bg-dark mat-elevation-z6" role="banner">
     <!-- <a mat-raised-button routerLinkActive #rla="routerLinkActive" [color]="rla.isActive ? 'Primary' : null"
       class="app-nav-link" routerLink="/">Palette</a> -->
-    <a mat-raised-button routerLinkActive #rla="routerLinkActive" [color]="rla.isActive ? 'Primary' : null"
+    <a mat-raised-button routerLinkActive #rla1="routerLinkActive" [color]="rla1.isActive ? 'primary' : null"
       class="app-nav-link" routerLink="/templates/base64">Base 64</a>
-    <a mat-raised-button routerLinkActive #rla="routerLinkActive" [color]="rla.isActive ? 'Primary' : null"
+    <a mat-raised-button routerLinkActive #rla2="routerLinkActive" [color]="rla2.isActive ? 'primary' : null"
       class="app-nav-link" routerLink="/templates/format-json">Format JSON</a>
-    <a mat-raised-button routerLinkActive #rla="routerLinkActive" [color]="rla.isActive ? 'Primary' : null"
+    <a mat-raised-button routerLinkActive #uri="routerLinkActive" [color]="uri.isActive ? 'primary' : null"
+      class="app-nav-link" routerLink="/templates/uri-encode">URI Encoder</a>
+    <a mat-raised-button routerLinkActive #rla3="routerLinkActive" [color]="rla3.isActive ? 'primary' : null"
       class="app-nav-link" routerLink="/test-page">Test Page</a>
+    <a mat-raised-button routerLinkActive #rla4="routerLinkActive" [color]="rla4.isActive ? 'primary' : null"
+      class="app-nav-link" routerLink="/palette">Create Your Own</a>
   </div>
 
   <div class="app-content" role="main">

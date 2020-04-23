@@ -1,28 +1,45 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PalettePageComponent } from './pages/palette-page/palette-page.component';
-import { Base64PageComponent } from './pages/base64-page/base64-page.component';
-import { FormatJsonPageComponent } from './pages/format-json-page/format-json-page.component';
 import { TestPageComponent } from './pages/test-page/test-page.component';
+import { RouteTemplatePageComponent } from './pages/route-template-page/route-template-page.component';
 
 
 const routes: Routes = [
   {
     path: 'templates/base64',
-    component: Base64PageComponent,
+    component: RouteTemplatePageComponent,
+    data: {
+      transforms: ['textInput', 'atob', 'textOutput']
+    }
   },
   {
     path: 'templates/format-json',
-    component: FormatJsonPageComponent,
+    component: RouteTemplatePageComponent,
+    data: {
+      transforms: ['textInput', 'parseJSON', 'formatJSON', 'textOutput']
+    }
+  },
+  {
+    path: 'templates/uri-encode',
+    component: RouteTemplatePageComponent,
+    data: {
+      transforms: ['textInput', 'uriEncode', 'textOutput']
+    }
   },
   {
     path: 'test-page',
     component: TestPageComponent,
   },
   {
-    path: '',
+    path: 'palette',
     component: PalettePageComponent,
   },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'templates/base64'
+  }
 ];
 
 @NgModule({
