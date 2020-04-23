@@ -26,7 +26,7 @@ spec:
       - name: quillreg-secret
       containers:
       - name: fiddle-run
-        image: quillreg.azurecr.io/fiddle-run:cf1
+        image: quillreg.azurecr.io/fiddle-run:cf4
         ports:
         - containerPort: 80
 ---
