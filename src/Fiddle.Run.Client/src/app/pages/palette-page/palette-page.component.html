@@ -1,3 +1,29 @@
-<div class="palette">
-    
+<div class="fiddle-palette">
+
+    <mat-card>
+        <mat-card-content>
+            <mat-chip-list #selectList aria-label="Select Transforms">
+                <mat-chip *ngFor="let tr of getList()" (click)="addTransform(tr)" [value]="tr">
+                    {{ tr }}
+                </mat-chip>
+            </mat-chip-list>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-content>
+            <mat-chip-list #chipList aria-label="Select transforms">
+                <mat-chip *ngFor="let tr of transforms$ | async; index as ix" [removable]="true" (removed)="remove(ix)">
+                    {{ tr }}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+        </mat-card-content>
+    </mat-card>
+
+    <ng-container *ngIf="transforms$ | async">
+        <fiddle-chain-transform class="fiddle-linear-layout" [transforms]="transforms$ | async">
+        </fiddle-chain-transform>
+    </ng-container>
+
 </div>
