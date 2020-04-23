@@ -19,6 +19,7 @@ import { CodeDisplayComponent } from './components/code-display/code-display.com
 import { TestPageComponent } from './pages/test-page/test-page.component';
 import { TransformApplierDirective } from './directives/transform-applier.directive';
 import { ChainTransformComponent } from './components/chain-transform/chain-transform.component';
+import { LinearLayoutComponent } from './components/linear-layout/linear-layout.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ChainTransformComponent } from './components/chain-transform/chain-tran
     TestPageComponent,
     TransformApplierDirective,
     ChainTransformComponent,
+    LinearLayoutComponent,
   ],
   imports: [
     BrowserModule,

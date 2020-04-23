@@ -1,6 +1,1 @@
-<fiddle-transform-box #inbox class="palette-item" [transform]="inboxTransform" (out)="trbox.in = $event">
-</fiddle-transform-box>
-<fiddle-transform-box #trbox class="palette-item" [transform]="transform" (out)="outbox.in = $event">
-</fiddle-transform-box>
-<fiddle-transform-box #outbox class="palette-item" [transform]="outboxTransform">
-</fiddle-transform-box>
+<fiddle-chain-transform class="fiddle-linear-layout" [transforms]="['textInput', 'atob', 'textOutput']">

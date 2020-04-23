@@ -18,7 +18,7 @@ export class TransformBoxComponent implements OnInit, OnDestroy {
   private readonly _transform = new BehaviorSubject<Transform>(TransformFactory.createNoop());
   private readonly _in = new BehaviorSubject<IFormattedData>(NullFormatted);
   private readonly _parameterChanged = new BehaviorSubject<boolean>(true);
-  private _sub: Subscription = null;
+  private _sub: Subscription = new Subscription();
 
   transform$ = this._transform.asObservable();
   in$ = this._in.asObservable();
@@ -45,10 +45,5 @@ export class TransformBoxComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._sub.unsubscribe();
-  }
-
-  test(val: any) {
-    console.log(val);
-    return val;
   }
 }

@@ -27,3 +27,21 @@ body {
 .bg-dark {
   background-color: #ba44ba;
 }
+
+/*
+ * Fiddle containers
+ */
+
+.fiddle-linear-layout {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  justify-content: space-evenly;
+}
+
+.fiddle-linear-layout fiddle-transform-box {
+  flex: 2 1 auto;
+  margin: 2em;
+}
