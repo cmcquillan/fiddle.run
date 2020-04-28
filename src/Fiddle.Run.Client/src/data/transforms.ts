@@ -76,20 +76,11 @@ export class TransformParameter {
 
 export type TransformFunction = (ctx: TransformContext) => boolean | Promise<boolean>;
 
-export interface TransformError {
-    message: string;
-}
-
-interface OutputData {
-    name: string;
-    data: any;
-}
-
 export class Transform {
     private readonly _outputStream: {
         [name: string]: BehaviorSubject<IFormattedData>;
     } = {};
-    private readonly _errorStream = new Subject<TransformError>();
+    private readonly _errorStream = new Subject<any>();
     private readonly _errorStream$ = this._errorStream.asObservable();
     private _subscription = new Subscription();
     private _inputStream: Observable<IFormattedData>;
@@ -148,7 +139,7 @@ export class Transform {
         return this._outputStream[name].asObservable();
     }
 
-    getErrorStream(): Observable<TransformError> {
+    getErrorStream(): Observable<any> {
         return this._errorStream$;
     }
 
@@ -179,8 +170,14 @@ export class Transform {
             map(([inputData, paramData]) => {
 
                 const ctx = new TransformContext(inputData, this, paramData);
-                if (!(this._func(ctx))) {
-                    this._errorStream.next({ message: 'Failure when transforming data.' });
+                try {
+                    if (!(this._func(ctx))) {
+                        this._errorStream.next({ message: 'Failure when transforming data.' });
+                    } {
+                        this._errorStream.next(null);
+                    }
+                } catch (error) {
+                    this._errorStream.next(error);
                 }
 
                 return ctx;

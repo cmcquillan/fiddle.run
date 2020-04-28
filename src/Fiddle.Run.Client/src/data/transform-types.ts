@@ -3,12 +3,9 @@ import { TransformParameter, Transform, TransformFunction } from './transforms';
 import Base64 from './base64';
 
 const parseJSON: TransformFunction = (ctx) => {
-    try {
-        let parsed = JSON.parse(ctx.data.value);
-        ctx.setData(parsed, Formats.Object);
-    } catch {
-        ctx.setData({}, Formats.Object);
-    }
+    let parsed = JSON.parse(ctx.data.value);
+    ctx.setData(parsed, Formats.Object);
+
     return true;
 }
 

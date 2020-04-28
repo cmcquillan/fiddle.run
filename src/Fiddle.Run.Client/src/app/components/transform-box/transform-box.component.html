@@ -35,15 +35,16 @@
                     <mat-tab-group>
                         <ng-container *ngFor="let output of tr.outputs">
                             <mat-tab *ngIf="output !== 'default'" [label]="output">
-                                <p>
-                                    {{ (tr.getOutputStream(output) | async)?.value }}
-                                </p>
+                                <pre>{{ (tr.getOutputStream(output) | async)?.value }}</pre>
                             </mat-tab>
                         </ng-container>
                         <ng-container>
                             <mat-tab *ngIf="tr.getErrorStream() | async; let error" label="errors">
-                                <p>
-                                    {{ error.message }}
+                                <h4 *ngIf="error.name">
+                                    {{ error.name }}: {{ error.message }}
+                                </h4>
+                                <p *ngIf="error.stack">
+                                    {{ error.stack }}
                                 </p>
                             </mat-tab>
                         </ng-container>
