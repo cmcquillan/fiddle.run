@@ -18,7 +18,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CodeDisplayComponent } from './components/code-display/code-display.component';
 import { TestPageComponent } from './pages/test-page/test-page.component';
-import { TransformApplierDirective } from './directives/transform-applier.directive';
 import { ChainTransformComponent } from './components/chain-transform/chain-transform.component';
 import { LinearLayoutComponent } from './components/linear-layout/linear-layout.component';
 import { RouteTemplatePageComponent } from './pages/route-template-page/route-template-page.component';
@@ -30,7 +29,6 @@ import { RouteTemplatePageComponent } from './pages/route-template-page/route-te
     PalettePageComponent,
     CodeDisplayComponent,
     TestPageComponent,
-    TransformApplierDirective,
     ChainTransformComponent,
     LinearLayoutComponent,
     RouteTemplatePageComponent,
