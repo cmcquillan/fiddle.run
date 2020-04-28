@@ -7,6 +7,8 @@ import { TransformContext, ErrorContext, Transform } from 'src/data/transforms';
 import { IFormattedData } from 'src/data/format';
 import { NullFormatted, Formats } from 'src/data/format-types';
 import { TransformFactory } from 'src/data/transform-types';
+import { MatDialog } from '@angular/material/dialog';
+import { ShowErrorDialogComponent } from '../show-error-dialog/show-error-dialog.component';
 
 @Component({
   selector: 'fiddle-transform-box',
@@ -32,7 +34,7 @@ export class TransformBoxComponent implements OnInit, OnDestroy {
 
   @Output() out = new EventEmitter<IFormattedData>();
 
-  constructor() {
+  constructor(private _dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -41,6 +43,12 @@ export class TransformBoxComponent implements OnInit, OnDestroy {
 
   parameterChanged(): void {
     this._parameterChanged.next(true);
+  }
+
+  openErrorViewer(error: any): void {
+    this._dialog.open(ShowErrorDialogComponent, {
+      data: error
+    });
   }
 
   ngOnDestroy(): void {

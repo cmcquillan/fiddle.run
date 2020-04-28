@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>
+    {{ error.name ? error.name + ': ' + error.message : 'Error' }}
+</h1>
+<mat-dialog-content>
+    <pre *ngIf="error.stack; else alt">{{ error.stack }}</pre>
+    <ng-template #alt>
+        {{ stringify(error) }}
+    </ng-template>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close="true">Close</button>
+</mat-dialog-actions>

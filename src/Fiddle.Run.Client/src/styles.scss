@@ -45,3 +45,11 @@ body {
   flex: 2 1 auto;
   margin: 2em;
 }
+
+.fiddle-flex-spacer {
+  flex-grow: 1;
+}
+
+.fiddle-flex-end {
+  align-items: flex-end;
+}

@@ -1,12 +1,19 @@
 <ng-container *ngIf="transform$ | async; let tr">
     <mat-card class="mat-elevation-z3 fiddle-transform-box">
         <mat-card-header>
-            <mat-card-title>
+            <div mat-card-title>
                 {{ tr?.name }}
+            </div>
+            <div class="fiddle-flex-spacer">
+            </div>
+            <div *ngIf="tr.getErrorStream() | async; let error">
+                <button class="fiddle-error-viewer-trigger" (click)="openErrorViewer(error)" mat-icon-button
+                    color="warn" aria-label="View Error">
+                    <mat-icon>report_problem</mat-icon>
+                </button>
+            </div>
+            <mat-card-title class="fiddle-card-title">
             </mat-card-title>
-            <mat-card-subtitle>
-                {{ tr?.in?.name }} -> {{ tr?.out?.name }}
-            </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
             <div>
@@ -38,18 +45,7 @@
                                 <pre>{{ (tr.getOutputStream(output) | async)?.value }}</pre>
                             </mat-tab>
                         </ng-container>
-                        <ng-container>
-                            <mat-tab *ngIf="tr.getErrorStream() | async; let error" label="errors">
-                                <h4 *ngIf="error.name">
-                                    {{ error.name }}: {{ error.message }}
-                                </h4>
-                                <p *ngIf="error.stack">
-                                    {{ error.stack }}
-                                </p>
-                            </mat-tab>
-                        </ng-container>
                     </mat-tab-group>
-
                 </ng-container>
             </div>
         </mat-card-content>
