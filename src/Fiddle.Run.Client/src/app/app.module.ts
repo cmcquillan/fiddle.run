@@ -23,6 +23,7 @@ import { RouteTemplatePageComponent } from './pages/route-template-page/route-te
 import { ShowErrorDialogComponent } from './components/show-error-dialog/show-error-dialog.component';
 import { TestPageComponent } from './pages/test-page/test-page.component';
 import { TransformBoxComponent } from './components/transform-box/transform-box.component';
+import { TransformBuilderDirective } from './directives/transform-builder.directive';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { TransformBoxComponent } from './components/transform-box/transform-box.
     LinearLayoutComponent,
     RouteTemplatePageComponent,
     ShowErrorDialogComponent,
+    TransformBuilderDirective,
   ],
   imports: [
     BrowserModule,
