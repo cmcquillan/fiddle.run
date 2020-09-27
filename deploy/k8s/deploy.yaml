@@ -41,18 +41,11 @@ spec:
   tls:
   - hosts:
     - tools.quill.codes
-    - www.quill.codes
     secretName: letsencrypt-prod
   rules:
   - host: tools.quill.codes
     http:
       paths:
       - backend:
-          serviceName: fiddle-run
-          servicePort: 80
-  - host: www.quill.codes
-    http:
-      paths:
-      - backend: 
           serviceName: fiddle-run
           servicePort: 80
