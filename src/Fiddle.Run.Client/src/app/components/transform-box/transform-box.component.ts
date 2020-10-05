@@ -32,6 +32,8 @@ export class TransformBoxComponent implements OnInit, OnDestroy {
   @Input() set in(value: IFormattedData) { this._in.next(value); this.parameterChanged(); }
   get in(): IFormattedData { return this._in.value; }
 
+  @Input() titleOverride: string = null;
+
   @Output() out = new EventEmitter<IFormattedData>();
 
   constructor(private _dialog: MatDialog) {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Subject, BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Pipeline } from 'src/data/pipeline';
 import { TransformStoreService } from 'src/app/services/transform-store.service';
 
@@ -25,6 +25,9 @@ export class ChainTransformComponent implements OnInit {
 
     this._pipeline.next(new Pipeline(trArray));
   }
+
+  @Input() inputTitle: string = null;
+  @Input() outputTitle: string = null;
 
   constructor(private readonly _store: TransformStoreService) {
   }
