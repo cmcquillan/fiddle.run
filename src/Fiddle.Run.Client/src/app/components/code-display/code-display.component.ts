@@ -1,5 +1,5 @@
 import { Component, Input, ElementRef, ViewChild } from '@angular/core';
-declare var Prism: any;
+// declare var Prism: any;
 
 @Component({
   selector: 'fiddle-code-display',
