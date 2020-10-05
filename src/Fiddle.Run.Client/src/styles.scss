@@ -8,13 +8,12 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+app-root {
+  width: 100%;
+}
+
 .app-container {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  display: block;
+  width: 100%;
 }
 
 /*
