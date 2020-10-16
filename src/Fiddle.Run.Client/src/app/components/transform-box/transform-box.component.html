@@ -1,5 +1,5 @@
 <ng-container *ngIf="transform$ | async; let tr">
-    <mat-card class="mat-elevation-z3 fiddle-transform-box">
+    <mat-card *ngIf="shouldShowCard" class="mat-elevation-z3 fiddle-transform-box">
         <mat-card-header>
             <div mat-card-title>
                 {{ titleOverride ? titleOverride : tr?.name }}

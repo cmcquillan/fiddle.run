@@ -19,7 +19,7 @@ app-root {
   justify-content: space-evenly;
 }
 
-.fiddle-linear-layout fiddle-transform-box {
+.fiddle-linear-layout fiddle-transform-box.transform-box-visible {
   flex: 2 1 auto;
   margin: 8px;
 }

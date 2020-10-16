@@ -1,5 +1,5 @@
 <ng-container *ngIf="pipeline$ | async; let pipe">
     <ng-container *ngFor="let tr of pipe.transforms; index as i; first as isFirst; last as isLast">
-        <fiddle-transform-box [titleOverride]="isFirst ? 'Your Data' : isLast ? 'Result' : null" [transform]="tr"></fiddle-transform-box>
+        <fiddle-transform-box [titleOverride]="isFirst ? 'Your Data' : isLast ? 'Result' : null" [transform]="tr" [showCard]="isLast"></fiddle-transform-box>
     </ng-container>
 </ng-container>

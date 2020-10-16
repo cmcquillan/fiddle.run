@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy, HostBinding } from '@angular/core';
 
 import { BehaviorSubject, Subscription, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -18,19 +18,18 @@ import { ShowErrorDialogComponent } from '../show-error-dialog/show-error-dialog
 })
 export class TransformBoxComponent implements OnInit, OnDestroy {
   private readonly _transform = new BehaviorSubject<Transform>(TransformFactory.createNoop());
-  private readonly _in = new BehaviorSubject<IFormattedData>(NullFormatted);
+  private readonly _showCard = new BehaviorSubject<boolean>(null);
   private readonly _parameterChanged = new BehaviorSubject<boolean>(true);
   private _sub: Subscription = new Subscription();
 
   transform$ = this._transform.asObservable();
-  in$ = this._in.asObservable();
   parameterChanged$ = this._parameterChanged.asObservable();
 
   @Input() set transform(value: Transform) { this._transform.next(value); }
   get transform(): Transform { return this._transform.value; }
 
-  @Input() set in(value: IFormattedData) { this._in.next(value); this.parameterChanged(); }
-  get in(): IFormattedData { return this._in.value; }
+  @Input() set showCard(value: boolean) { this._showCard.next(value); }
+  get showCard(): boolean { return this._showCard.value; }
 
   @Input() titleOverride: string = null;
 
@@ -41,6 +40,11 @@ export class TransformBoxComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+  }
+
+  @HostBinding('class.transform-box-visible')
+  get shouldShowCard(): boolean {
+    return this.transform.params.length > 0 || this.showCard;
   }
 
   parameterChanged(): void {
