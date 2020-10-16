@@ -166,7 +166,7 @@ export class Transform {
             paramData = of({});
         }
 
-        const outputStream = combineLatest(this._inputStream, paramData).pipe(
+        const outputStream = combineLatest([this._inputStream, paramData]).pipe(
             map(([inputData, paramData]) => {
 
                 const ctx = new TransformContext(inputData, this, paramData);
