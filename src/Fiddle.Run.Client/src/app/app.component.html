@@ -3,12 +3,13 @@
     <div class="app-logo">
       <img src="assets/logo.png" />
     </div>
-    <a mat-raised-button routerLinkActive #rla1="routerLinkActive" [color]="rla1.isActive ? 'primary' : null"
-      class="app-nav-link" routerLink="/templates/base64">Base 64 Encoder</a>
-    <a mat-raised-button routerLinkActive #rla2="routerLinkActive" [color]="rla2.isActive ? 'primary' : null"
-      class="app-nav-link" routerLink="/templates/format-json">JSON Formatter</a>
-    <a mat-raised-button routerLinkActive #uri="routerLinkActive" [color]="uri.isActive ? 'primary' : null"
-      class="app-nav-link" routerLink="/templates/uri-encode">URI Encoder</a>
+    <a mat-raised-button routerLinkActive="active" #rla1="routerLinkActive" [color]="rla1.isActive ? 'primary' : null"
+      [routerLinkActiveOptions]="{exact: true}" class="app-nav-link" routerLink="/">Base 64 Encoder</a>
+    <a mat-raised-button routerLinkActive="active" #rla2="routerLinkActive" [color]="rla2.isActive ? 'primary' : null"
+      [routerLinkActiveOptions]="{exact: true}" class="app-nav-link" routerLink="/templates/format-json">JSON
+      Formatter</a>
+    <a mat-raised-button routerLinkActive="active" #rla3="routerLinkActive" [color]="rla3.isActive ? 'primary' : null"
+      [routerLinkActiveOptions]="{exact: true}" class="app-nav-link" routerLink="/templates/uri-encode">URI Encoder</a>
   </div>
 
   <div class="app-content" role="main">

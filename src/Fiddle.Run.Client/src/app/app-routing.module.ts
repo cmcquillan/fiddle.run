@@ -7,13 +7,6 @@ import { RouteTemplatePageComponent } from './pages/route-template-page/route-te
 
 const routes: Routes = [
   {
-    path: 'templates/base64',
-    component: RouteTemplatePageComponent,
-    data: {
-      transforms: ['textInput', 'atob', 'textOutput']
-    }
-  },
-  {
     path: 'templates/format-json',
     component: RouteTemplatePageComponent,
     data: {
@@ -38,7 +31,10 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'templates/base64'
+    component: RouteTemplatePageComponent,
+    data: {
+      transforms: ['textInput', 'atob', 'textOutput']
+    }
   }
 ];
 
