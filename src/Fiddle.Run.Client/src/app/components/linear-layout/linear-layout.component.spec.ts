@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { LinearLayoutComponent } from './linear-layout.component';
 
@@ -6,7 +6,7 @@ describe('LinearLayoutComponent', () => {
   let component: LinearLayoutComponent;
   let fixture: ComponentFixture<LinearLayoutComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ LinearLayoutComponent ]
     })

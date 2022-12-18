@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { Base64PageComponent } from './base64-page.component';
 
@@ -6,7 +6,7 @@ describe('Base64PageComponent', () => {
   let component: Base64PageComponent;
   let fixture: ComponentFixture<Base64PageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ Base64PageComponent ]
     })
