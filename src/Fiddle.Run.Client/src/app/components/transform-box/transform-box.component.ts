@@ -7,7 +7,7 @@ import { TransformContext, ErrorContext, Transform } from 'src/data/transforms';
 import { IFormattedData } from 'src/data/format';
 import { NullFormatted, Formats } from 'src/data/format-types';
 import { TransformFactory } from 'src/data/transform-types';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { ShowErrorDialogComponent } from '../show-error-dialog/show-error-dialog.component';
 
 @Component({
