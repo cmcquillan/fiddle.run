@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { TransformStoreService } from 'src/app/services/transform-store.service';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
@@ -11,7 +11,7 @@ import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material
   styleUrls: ['./palette-page.component.scss'],
 })
 export class PalettePageComponent implements OnInit {
-  transformCtrl = new FormControl();
+  transformCtrl = new UntypedFormControl();
   filteredTransforms$: Observable<string[]>;
   @ViewChild('trInput') trInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
