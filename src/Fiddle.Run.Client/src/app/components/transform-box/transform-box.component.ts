@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy, HostBinding } from '@angular/core';
 
 import { BehaviorSubject, Subscription, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { TransformContext, ErrorContext, Transform } from 'src/data/transforms';
 import { IFormattedData } from 'src/data/format';

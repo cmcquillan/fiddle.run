@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { FormatJsonPageComponent } from './format-json-page.component';
 
@@ -6,7 +6,7 @@ describe('FormatJsonPageComponent', () => {
   let component: FormatJsonPageComponent;
   let fixture: ComponentFixture<FormatJsonPageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ FormatJsonPageComponent ]
     })

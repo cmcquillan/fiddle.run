@@ -11,7 +11,7 @@ import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material
   styleUrls: ['./palette-page.component.scss'],
 })
 export class PalettePageComponent implements OnInit {
-  transformCtrl = new FormControl();
+  transformCtrl = new FormControl('');
   filteredTransforms$: Observable<string[]>;
   @ViewChild('trInput') trInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;

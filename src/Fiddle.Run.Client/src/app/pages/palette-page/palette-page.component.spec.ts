@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PalettePageComponent } from './palette-page.component';
 
@@ -6,7 +6,7 @@ describe('PalettePageComponent', () => {
   let component: PalettePageComponent;
   let fixture: ComponentFixture<PalettePageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PalettePageComponent ]
     })

@@ -2,22 +2,22 @@
 
     <mat-card>
         <mat-card-content>
-            <mat-chip-list #selectList aria-label="Select Transforms">
-                <mat-chip *ngFor="let tr of getList()" (click)="addTransform(tr)" [value]="tr">
+            <mat-chip-listbox #selectList aria-label="Select Transforms">
+                <mat-chip-option *ngFor="let tr of getList()" (click)="addTransform(tr)" [value]="tr">
                     {{ tr }}
-                </mat-chip>
-            </mat-chip-list>
+                </mat-chip-option>
+            </mat-chip-listbox>
         </mat-card-content>
     </mat-card>
 
     <mat-card>
         <mat-card-content>
-            <mat-chip-list #chipList aria-label="Select transforms">
-                <mat-chip *ngFor="let tr of transforms$ | async; index as ix" [removable]="true" (removed)="remove(ix)">
+            <mat-chip-listbox #chipList aria-label="Select transforms">
+                <mat-chip-option *ngFor="let tr of transforms$ | async; index as ix" [removable]="true" (removed)="remove(ix)">
                     {{ tr }}
                     <mat-icon matChipRemove>cancel</mat-icon>
-                </mat-chip>
-            </mat-chip-list>
+                </mat-chip-option>
+            </mat-chip-listbox>
         </mat-card-content>
     </mat-card>
 
