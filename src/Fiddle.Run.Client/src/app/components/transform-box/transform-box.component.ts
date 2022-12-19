@@ -1,13 +1,12 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy, HostBinding } from '@angular/core';
 
 import { BehaviorSubject, Subscription, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { TransformContext, ErrorContext, Transform } from 'src/data/transforms';
 import { IFormattedData } from 'src/data/format';
 import { NullFormatted, Formats } from 'src/data/format-types';
 import { TransformFactory } from 'src/data/transform-types';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ShowErrorDialogComponent } from '../show-error-dialog/show-error-dialog.component';
 
 @Component({

@@ -3,7 +3,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { TransformStoreService } from 'src/app/services/transform-store.service';
 import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
-import { MatLegacyAutocomplete as MatAutocomplete, MatLegacyAutocompleteSelectedEvent as MatAutocompleteSelectedEvent } from '@angular/material/legacy-autocomplete';
+import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'fiddle-palette-page',
